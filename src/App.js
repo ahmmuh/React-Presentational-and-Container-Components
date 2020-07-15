@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
-function App() {
+function Button(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <button className="btn" onClick={() => props.onClick()}>
+      {props.text}
+    </button>
   );
+}
+
+class Sidebar extends Component {
+  handelSidebar = () => {
+    console.log("sidebar");
+  };
+  render() {
+    return (
+      <div>
+        <Button onClick={this.handelSidebar} text="Sidebar" />
+      </div>
+    );
+  }
+}
+
+class Form extends Component {
+  onClick() {
+    console.log("form submitted");
+  }
+  render() {
+    return <Button onClick={() => this.onClick()} text="Submit" />;
+  }
+}
+
+class App extends Component {
+  onClick = () => {
+    console.log("clicked");
+  };
+  render() {
+    return (
+      <div className="App">
+        <Form />
+        <Button onClick={() => this.onClick()} text="App" />
+        <Sidebar />
+      </div>
+    );
+  }
 }
 
 export default App;
